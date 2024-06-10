@@ -21,7 +21,7 @@ struct ContentView: View {
                     Label("Better Call Saul", systemImage: "briefcase")
                 }
         }
-      
+        .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
     }
 }
 
