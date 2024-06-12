@@ -16,4 +16,5 @@ struct Character: Decodable {
     let aliases: [String]
     let status: String
     let portrayedBy: String
+    var death: Death?
 }
