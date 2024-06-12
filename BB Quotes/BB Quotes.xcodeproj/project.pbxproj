@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B1791E82C1A5F2E00BE1C39 /* FetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1791E72C1A5F2E00BE1C39 /* FetchService.swift */; };
 		9B22AAB82C1900AF002D8F5E /* Death.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B22AAB72C1900AF002D8F5E /* Death.swift */; };
 		9B88B7322C1690E800CAF5FA /* BB_QuotesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B88B7312C1690E800CAF5FA /* BB_QuotesApp.swift */; };
 		9B88B7342C1690E800CAF5FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B88B7332C1690E800CAF5FA /* ContentView.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B1791E72C1A5F2E00BE1C39 /* FetchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchService.swift; sourceTree = "<group>"; };
 		9B22AAB72C1900AF002D8F5E /* Death.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Death.swift; sourceTree = "<group>"; };
 		9B88B72E2C1690E800CAF5FA /* BB Quotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BB Quotes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B88B7312C1690E800CAF5FA /* BB_QuotesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BB_QuotesApp.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				9B88B7332C1690E800CAF5FA /* ContentView.swift */,
 				9BCA35362C17D1FB00DE5D79 /* Quote.swift */,
 				9BCA35382C17D2E600DE5D79 /* Character.swift */,
+				9B1791E72C1A5F2E00BE1C39 /* FetchService.swift */,
 				9B22AAB72C1900AF002D8F5E /* Death.swift */,
 				9B88B7352C1690E900CAF5FA /* Assets.xcassets */,
 				9B88B73F2C16926600CAF5FA /* SampleData */,
@@ -170,6 +173,7 @@
 				9B88B7342C1690E800CAF5FA /* ContentView.swift in Sources */,
 				9BCA35372C17D1FB00DE5D79 /* Quote.swift in Sources */,
 				9B88B7322C1690E800CAF5FA /* BB_QuotesApp.swift in Sources */,
+				9B1791E82C1A5F2E00BE1C39 /* FetchService.swift in Sources */,
 				9BCA35392C17D2E600DE5D79 /* Character.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
