@@ -27,5 +27,10 @@ struct FetchService {
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             throw FetchError.badResponse
             }
-        }
+        
+        // Decode data
+        let quote = try JSONDecoder().decode(Quote.self, from: data)
+        
+        return quote
+    }
 }
