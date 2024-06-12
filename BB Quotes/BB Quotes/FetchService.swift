@@ -14,4 +14,11 @@ struct FetchService {
     }
     
     let baseURL = URL(string: "https://breaking-bad-api-six.vercel.app/api")!
+    
+    func fetchQoute(from show: String) async throws -> Quote {
+        let quoteURL = baseURL.appending(path: "quote/random")
+        let fetchURL = quoteURL.appending(queryItems: [URLQueryItem(name: "production", value: show)])
+        
+        
+    }
 }
