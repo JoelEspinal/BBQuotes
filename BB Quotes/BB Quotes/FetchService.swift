@@ -33,4 +33,24 @@ struct FetchService {
         
         return quote
     }
+    
+    func fetchCharacter(_ name: String) async throws ->  Character {
+        let characterURL = baseURL.appending(path: "characters")
+        let fetchURL = characterURL.appending(queryItems: [URLQueryItem(name: "name", value: name)])
+        
+        // Fetch data
+        let (data, response) = try await URLSession.shared.data(from: fetchURL)
+        
+        // Handle response
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw FetchError.badResponse
+        }
+        
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        let characters = try decoder.decode([Character].self, from: data)
+        
+        return characters[0]
+    }
 }
