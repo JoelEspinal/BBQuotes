@@ -16,4 +16,14 @@ class ViewModel {
         case sucess
         case error(error: Error)
     }
+    
+    private(set) var status: FetchStatus = .notStarted
+    private let fetcher = FetchService()
+    
+    var quote: Quote
+    var character: Character
+    
+    init() {
+  
+    }
 }
