@@ -13,7 +13,7 @@ struct FetchService {
         case badResponse
     }
     
-    let baseURL = URL(string: "https://breaking-bad-api-six.vercel.app/api")!
+    private let baseURL = URL(string: "https://breaking-bad-api-six.vercel.app/api")!
     
     func fetchQoute(from show: String) async throws -> Quote {
         // Build fecth url
