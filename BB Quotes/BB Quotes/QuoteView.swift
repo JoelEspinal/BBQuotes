@@ -21,6 +21,11 @@ struct QuoteView: View {
                 VStack {
                     Text("\"\(viewModel.quote.quote)\"")
                         .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(.black.opacity(0.5))
+                        .clipShape(.rect(cornerRadius: 25))
+                        .padding(.horizontal)
                 }
                 .frame(width: geo.size.width)
             }
