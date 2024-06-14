@@ -18,6 +18,11 @@ struct QuoteView: View {
                     .replacingOccurrences(of: " ", with: ""))
                 .resizable()
                 .frame(width: geo.size.width * 2.7, height: geo.size.height * 1.2)
+                VStack {
+                    Text("\"\(viewModel.quote.quote)\"")
+                        .multilineTextAlignment(.center)
+                }
+                .frame(width: geo.size.width)
             }
             .frame(width: geo.size.width, height: geo.size.height)
         }
