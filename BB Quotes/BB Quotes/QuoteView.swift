@@ -19,6 +19,7 @@ struct QuoteView: View {
                 .resizable()
                 .frame(width: geo.size.width * 2.7, height: geo.size.height * 1.2)
                 VStack {
+                    Spacer()
                     Text("\"\(viewModel.quote.quote)\"")
                         .multilineTextAlignment(.center)
                         .foregroundColor(.white)
@@ -56,9 +57,9 @@ struct QuoteView: View {
                             .clipShape(.rect(cornerRadius: 7))
                             .shadow(color: Color("BreakingBadYellow"), radius: 2)
                     }
-                   
+                   Spacer(minLength: 95)
                 }
-                .frame(width: geo.size.width)
+                .frame(width: geo.size.width, height: geo.size.height)
             }
             .frame(width: geo.size.width, height: geo.size.height)
         }
