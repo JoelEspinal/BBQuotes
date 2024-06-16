@@ -51,8 +51,7 @@ struct QuoteView: View {
                     .font(.title)
                     .foregroundColor(.white)
                     .padding()
-
-                    .background(.green)
+                    .background(Color("BreakingBadGreen"))
                 }
                 .frame(width: geo.size.width)
             }
