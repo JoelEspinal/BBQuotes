@@ -44,6 +44,15 @@ struct QuoteView: View {
                     }
                     .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
                     .clipShape(.rect(cornerRadius: 50))
+                
+                    Button("Get Random Quote") {
+                        
+                    }
+                    .font(.title)
+                    .foregroundColor(.white)
+                    .padding()
+
+                    .background(.green)
                 }
                 .frame(width: geo.size.width)
             }
