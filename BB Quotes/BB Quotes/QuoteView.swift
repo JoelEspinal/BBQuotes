@@ -26,6 +26,16 @@ struct QuoteView: View {
                         .background(.black.opacity(0.5))
                         .clipShape(.rect(cornerRadius: 25))
                         .padding(.horizontal)
+                    ZStack {
+                        AsyncImage(url: viewModel.character.images[0]) { image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                        } placeholder: {
+                            ProgressView()
+                        }
+                    }
+                    .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
                 }
                 .frame(width: geo.size.width)
             }
