@@ -52,6 +52,8 @@ struct QuoteView: View {
                     .foregroundColor(.white)
                     .padding()
                     .background(Color("BreakingBadGreen"))
+                    .clipShape(.rect(cornerRadius: 7))
+                    .shadow(color: Color("BreakingBadYellow"), radius: 2)
                 }
                 .frame(width: geo.size.width)
             }
