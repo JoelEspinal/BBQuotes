@@ -19,8 +19,9 @@ struct QuoteView: View {
                 .resizable()
                 .frame(width: geo.size.width * 2.7, height: geo.size.height * 1.2)
                 VStack {
-                    Spacer()
+                    Spacer(minLength: 60)
                     Text("\"\(viewModel.quote.quote)\"")
+                        .minimumScaleFactor(0.5)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.white)
                         .padding()
