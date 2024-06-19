@@ -19,14 +19,15 @@ struct QuoteView: View {
                 .resizable()
                 .frame(width: geo.size.width * 2.7, height: geo.size.height * 1.2)
                 VStack {
-                    Spacer(minLength: 60)
-                    
-                    switch viewModel.status {
-                    case FetchStatus.notStarted:
+                    VStack {
+                        Spacer(minLength: 60)
+                        
+                        switch viewModel.status {
+                        case FetchStatus.notStarted:
                             EmptyView()
-                    case FetchStatus.fetching:
+                        case FetchStatus.fetching:
                             ProgressView()
-                    case FetchStatus.success:
+                        case FetchStatus.success:
                             Text("\"\(viewModel.quote.quote)\"")
                                 .minimumScaleFactor(0.5)
                                 .multilineTextAlignment(.center)
@@ -53,28 +54,31 @@ struct QuoteView: View {
                             }
                             .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
                             .clipShape(.rect(cornerRadius: 50))
-               
-                
-                    case FetchStatus.failed(let error):
-                                Text(error.localizedDescription)
-                    }
-            
-                    Button {
-                        Task {
-                            await viewModel.getData(for: show)
+                            
+                            
+                        case FetchStatus.failed(let error):
+                            Text(error.localizedDescription)
                         }
-                    } label: {
-                        Text("Get Random Quote")
-                            .font(.title)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color("BreakingBadGreen"))
-                            .clipShape(.rect(cornerRadius: 7))
-                            .shadow(color: Color("BreakingBadYellow"), radius: 2)
+                        
+                        Spacer()
                     }
+                        Button {
+                            Task {
+                                await viewModel.getData(for: show)
+                            }
+                        } label: {
+                            Text("Get Random Quote")
+                                .font(.title)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color("BreakingBadGreen"))
+                                .clipShape(.rect(cornerRadius: 7))
+                                .shadow(color: Color("BreakingBadYellow"), radius: 2)
+                        }
+                        
+                        Spacer(minLength: 95)
                     
-                    Spacer(minLength: 95)
-                }
+                    }
                 .frame(width: geo.size.width, height: geo.size.height)
             }
             .frame(width: geo.size.width, height: geo.size.height)
