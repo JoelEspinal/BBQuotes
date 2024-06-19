@@ -7,16 +7,18 @@
 
 import Foundation
 
+enum FetchStatus {
+    case notStarted
+    case fetching
+    case success
+    case failed(error: Error)
+}
+
+
 @Observable
 class ViewModel {
-    
-    enum FetchStatus {
-        case notStarted
-        case fetching
-        case success
-        case failed(error: Error)
-    }
-    
+        
+
     private(set) var status: FetchStatus = .notStarted
     private let fetcher = FetchService()
     
@@ -48,3 +50,4 @@ class ViewModel {
         }
     }
 }
+
