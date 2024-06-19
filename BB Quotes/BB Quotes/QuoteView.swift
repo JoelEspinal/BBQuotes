@@ -20,33 +20,45 @@ struct QuoteView: View {
                 .frame(width: geo.size.width * 2.7, height: geo.size.height * 1.2)
                 VStack {
                     Spacer(minLength: 60)
-                    Text("\"\(viewModel.quote.quote)\"")
-                        .minimumScaleFactor(0.5)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(.black.opacity(0.5))
-                        .clipShape(.rect(cornerRadius: 25))
-                        .padding(.horizontal)
-                    ZStack (alignment: .bottom){
-                        AsyncImage(url: viewModel.character.images[0]) { image in
-                            image
-                                .resizable()
-                                .scaledToFill()
-                        } placeholder: {
+                    
+                    switch viewModel.status {
+                    case FetchStatus.notStarted:
+                            EmptyView()
+                    case FetchStatus.fetching:
                             ProgressView()
-                        }
-                        .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
-                        
-                        Text(viewModel.quote.author)
-                            .foregroundStyle(.white)
-                            .padding(10)
-                            .frame(maxWidth: .infinity)
-                            .background(.ultraThinMaterial)
-                    }
-                    .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
-                    .clipShape(.rect(cornerRadius: 50))
+                    case FetchStatus.success:
+                            Text("\"\(viewModel.quote.quote)\"")
+                                .minimumScaleFactor(0.5)
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(.black.opacity(0.5))
+                                .clipShape(.rect(cornerRadius: 25))
+                                .padding(.horizontal)
+                            ZStack (alignment: .bottom){
+                                AsyncImage(url: viewModel.character.images[0]) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                                .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
+                                
+                                Text(viewModel.quote.author)
+                                    .foregroundStyle(.white)
+                                    .padding(10)
+                                    .frame(maxWidth: .infinity)
+                                    .background(.ultraThinMaterial)
+                            }
+                            .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
+                            .clipShape(.rect(cornerRadius: 50))
+               
                 
+                    case FetchStatus.failed(let error):
+                                Text(error.localizedDescription)
+                    }
+            
                     Button {
                         Task {
                             await viewModel.getData(for: show)
@@ -60,7 +72,8 @@ struct QuoteView: View {
                             .clipShape(.rect(cornerRadius: 7))
                             .shadow(color: Color("BreakingBadYellow"), radius: 2)
                     }
-                   Spacer(minLength: 95)
+                    
+                    Spacer(minLength: 95)
                 }
                 .frame(width: geo.size.width, height: geo.size.height)
             }
@@ -68,7 +81,6 @@ struct QuoteView: View {
         }
         .ignoresSafeArea()
     }
-       
 }
 
 #Preview {
