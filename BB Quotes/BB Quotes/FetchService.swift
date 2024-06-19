@@ -13,29 +13,30 @@ struct FetchService {
         case badResponse
     }
     
-    private let baseURL = URL(string: "https://breaking-bad-api-six.vercel.app/api")!
+    private let baseURL = URL(string: "https://api.breakingbadquotes.xyz/v1")!
+    private let bbURL = URL(string: "https://breaking-bad-api-six.vercel.app/api")!
     
     func fetchQoute(from show: String) async throws -> Quote {
         // Build fecth url
-        let quoteURL = baseURL.appending(path: "quote/random")
-        let fetchURL = quoteURL.appending(queryItems: [URLQueryItem(name: "production", value: show)])
+        let quoteURL = baseURL.appending(path: "/quotes/1")
+//        let fetchURL = quoteURL.appending(queryItems: [URLQueryItem(name: "production", value: show)])
         
         // Fetch data
-        let (data, response) = try await URLSession.shared.data(from: fetchURL)
+        let (data, response) = try await URLSession.shared.data(from: quoteURL)
         
         // Handle response
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             throw FetchError.badResponse
-            }
+        }
         
         // Decode data
-        let quote = try JSONDecoder().decode(Quote.self, from: data)
+        let quote = try JSONDecoder().decode([Quote].self, from: data)
         
-        return quote
+        return quote[0]
     }
     
     func fetchCharacter(_ name: String) async throws ->  Character {
-        let characterURL = baseURL.appending(path: "characters")
+        let characterURL = bbURL.appending(path: "characters")
         let fetchURL = characterURL.appending(queryItems: [URLQueryItem(name: "name", value: name)])
         
         // Fetch data
@@ -55,7 +56,7 @@ struct FetchService {
     }
     
     func fetchDeath(for character: String) async throws -> Death? {
-        let deathURL = baseURL.appending(path: "deaths")
+        let deathURL = bbURL.appending(path: "deaths")
         
         // Fetch data
         let (data, response) = try await URLSession.shared.data(from: deathURL)

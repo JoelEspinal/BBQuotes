@@ -38,7 +38,7 @@ struct QuoteView: View {
                         }
                         .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
                         
-                        Text(viewModel.quote.character)
+                        Text(viewModel.quote.author)
                             .foregroundStyle(.white)
                             .padding(10)
                             .frame(maxWidth: .infinity)
@@ -48,7 +48,9 @@ struct QuoteView: View {
                     .clipShape(.rect(cornerRadius: 50))
                 
                     Button {
-                        
+                        Task {
+                            await viewModel.getData(for: show)
+                        }
                     } label: {
                         Text("Get Random Quote")
                             .font(.title)

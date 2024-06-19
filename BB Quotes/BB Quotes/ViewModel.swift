@@ -39,7 +39,7 @@ class ViewModel {
         
         do {
             quote = try await fetcher.fetchQoute(from: show)
-            character = try await fetcher.fetchCharacter(quote.character)
+            character = try await fetcher.fetchCharacter(quote.author)
             character.death = try await fetcher.fetchDeath(for: character.name)
             
             status = .success
