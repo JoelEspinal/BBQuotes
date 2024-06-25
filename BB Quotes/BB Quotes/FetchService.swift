@@ -19,7 +19,10 @@ struct FetchService {
     func fetchQoute(from show: String) async throws -> Quote {
         // Build fecth url
         let quoteURL = baseURL.appending(path: "/quotes/1")
-//        let fetchURL = quoteURL.appending(queryItems: [URLQueryItem(name: "production", value: show)])
+        
+        if show.lowercased() == "Better Call Saul".lowercased() {
+            let fetchURL = quoteURL.appending(queryItems: [URLQueryItem(name: "production", value: show)])
+        }
         
         // Fetch data
         let (data, response) = try await URLSession.shared.data(from: quoteURL)
