@@ -18,10 +18,10 @@ struct QuoteView: View {
                     .replacingOccurrences(of: " ", with: ""))
                 .resizable()
                 .frame(width: geo.size.width * 2.7, height: geo.size.height * 1.2)
-                VStack {
+                VStack( content: {
+                    Spacer()
                     VStack {
-                        Spacer(minLength: 60)
-                        
+//                        Spacer(minLength: 60)
                         switch viewModel.status {
                         case FetchStatus.notStarted:
                             EmptyView()
@@ -58,33 +58,36 @@ struct QuoteView: View {
                             
                         case FetchStatus.failed(let error):
                             Text(error.localizedDescription)
+                            
                         }
                         
-                        Spacer()
+//                       Spacer()
                     }
-                        Button {
-                            Task {
-                                await viewModel.getData(for: show)
-                            }
-                        } label: {
-                            Text("Get Random Quote")
-                                .font(.title)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color("BreakingBadGreen"))
-                                .clipShape(.rect(cornerRadius: 7))
-                                .shadow(color: Color("BreakingBadYellow"), radius: 2)
-                        }
-                        
-                        Spacer(minLength: 95)
                     
-                    }
-                .frame(width: geo.size.width, height: geo.size.height)
+                    Button {
+                        Task {
+                            await viewModel.getData(for: show)
+                        }
+                    } label: {
+                        Text("Get Random Quote")
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color("\(show)Button".replacingOccurrences(of: " ", with: "")))
+                            .clipShape(.rect(cornerRadius: 7))
+                            .shadow(color: Color("\(show)Shadow".replacingOccurrences(of: " ", with: "")), radius: 2)
+                        
+                      //  Spacer(minLength: 95)
+                        
+                    }.frame(width: geo.size.width, height: geo.size.height)
+                });
             }
             .frame(width: geo.size.width, height: geo.size.height)
         }
         .ignoresSafeArea()
     }
+
+    
 }
 
 #Preview {
