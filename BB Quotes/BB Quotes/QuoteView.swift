@@ -12,57 +12,60 @@ struct QuoteView: View {
     let show: String
     
     var body: some View {
+        
         GeometryReader { geo in
+            
+            Spacer()
+            
             ZStack {
                 Image(show.lowercased()
                     .replacingOccurrences(of: " ", with: ""))
                 .resizable()
                 .frame(width: geo.size.width * 2.7, height: geo.size.height * 1.2)
-                VStack( content: {
-                    Spacer()
-                    VStack {
-//                        Spacer(minLength: 60)
-                        switch viewModel.status {
-                        case FetchStatus.notStarted:
-                            EmptyView()
-                        case FetchStatus.fetching:
-                            ProgressView()
-                        case FetchStatus.success:
-                            Text("\"\(viewModel.quote.quote)\"")
-                                .minimumScaleFactor(0.5)
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(.black.opacity(0.5))
-                                .clipShape(.rect(cornerRadius: 25))
-                                .padding(.horizontal)
-                            ZStack (alignment: .bottom){
-                                AsyncImage(url: viewModel.character.images[0]) { image in
-                                    image
-                                        .resizable()
-                                        .scaledToFill()
-                                } placeholder: {
-                                    ProgressView()
-                                }
-                                .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
-                                
-                                Text(viewModel.quote.author)
-                                    .foregroundStyle(.white)
-                                    .padding(10)
-                                    .frame(maxWidth: .infinity)
-                                    .background(.ultraThinMaterial)
+                
+                VStack(alignment: .center, content: {
+                    switch viewModel.status {
+                    case FetchStatus.notStarted:
+                        EmptyView()
+                    case FetchStatus.fetching:
+                        ProgressView()
+                    case FetchStatus.success:
+                        
+                        Spacer(minLength: 100)
+                        
+                        Text("\"\(viewModel.quote.quote)\"")
+                            .minimumScaleFactor(0.5)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(.black.opacity(0.5))
+                            .clipShape(.rect(cornerRadius: 25))
+                            .padding(.horizontal)
+                        
+                        ZStack(alignment: .bottom) {
+                            AsyncImage(url: viewModel.character.images[0]) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                            } placeholder: {
+                                ProgressView()
                             }
                             .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
-                            .clipShape(.rect(cornerRadius: 50))
                             
-                            
-                        case FetchStatus.failed(let error):
-                            Text(error.localizedDescription)
-                            
+                            Text(viewModel.quote.author)
+                                .foregroundStyle(.white)
+                                .padding(10)
+                                .frame(maxWidth: .infinity)
+                                .background(.ultraThinMaterial)
                         }
+                        .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
+                        .clipShape(.rect(cornerRadius: 50))
                         
-//                       Spacer()
+                    case FetchStatus.failed(let error):
+                        Text(error.localizedDescription)
                     }
+                    
+                    Spacer()
                     
                     Button {
                         Task {
@@ -76,18 +79,16 @@ struct QuoteView: View {
                             .background(Color("\(show)Button".replacingOccurrences(of: " ", with: "")))
                             .clipShape(.rect(cornerRadius: 7))
                             .shadow(color: Color("\(show)Shadow".replacingOccurrences(of: " ", with: "")), radius: 2)
-                        
-                      //  Spacer(minLength: 95)
-                        
-                    }.frame(width: geo.size.width, height: geo.size.height)
+                    }
+                    .frame(width: geo.size.width , height: geo.size.height / 2)
                 });
             }
             .frame(width: geo.size.width, height: geo.size.height)
+            
+            Spacer()
         }
         .ignoresSafeArea()
     }
-
-    
 }
 
 #Preview {
