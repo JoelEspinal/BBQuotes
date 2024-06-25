@@ -27,9 +27,7 @@ struct QuoteView: View {
                     case FetchStatus.fetching:
                         ProgressView()
                     case FetchStatus.success:
-                        
-//                            Spacer(minLength: 300)
-                        
+                    
                         Text("\"\(viewModel.quote.quote)\"")
                             .minimumScaleFactor(0.5)
                             .multilineTextAlignment(.center)
@@ -82,8 +80,6 @@ struct QuoteView: View {
                     .shadow(color: Color("\(show)Shadow".replacingOccurrences(of: " ", with: "")), radius: 2)
             }
             .padding()
-           //
-            //.frame(width: geo.size.width , height: geo.size.height / 2)
         }
         
     }
