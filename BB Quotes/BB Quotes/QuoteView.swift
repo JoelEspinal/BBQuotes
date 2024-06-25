@@ -21,12 +21,14 @@ struct QuoteView: View {
                 VStack {
                     Spacer(minLength: 60)
                     
-                    switch viewModel.status {
-                    case FetchStatus.notStarted:
+                    VStack {
+                        
+                        switch viewModel.status {
+                        case FetchStatus.notStarted:
                             EmptyView()
-                    case FetchStatus.fetching:
+                        case FetchStatus.fetching:
                             ProgressView()
-                    case FetchStatus.success:
+                        case FetchStatus.success:
                             Text("\"\(viewModel.quote.quote)\"")
                                 .minimumScaleFactor(0.5)
                                 .multilineTextAlignment(.center)
@@ -53,12 +55,16 @@ struct QuoteView: View {
                             }
                             .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
                             .clipShape(.rect(cornerRadius: 50))
-               
-                
-                    case FetchStatus.failed(let error):
-                                Text(error.localizedDescription)
-                    }
-            
+                            
+                            
+                        case FetchStatus.failed(let error):
+                            Text(error.localizedDescription)
+                        }
+                        
+                        Spacer()
+                    
+                }
+                    
                     Button {
                         Task {
                             await viewModel.getData(for: show)
