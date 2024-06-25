@@ -14,9 +14,6 @@ struct QuoteView: View {
     var body: some View {
         
         GeometryReader { geo in
-            
-            Spacer()
-            
             ZStack {
                 Image(show.lowercased()
                     .replacingOccurrences(of: " ", with: ""))
@@ -31,7 +28,7 @@ struct QuoteView: View {
                         ProgressView()
                     case FetchStatus.success:
                         
-                        Spacer(minLength: 100)
+//                            Spacer(minLength: 300)
                         
                         Text("\"\(viewModel.quote.quote)\"")
                             .minimumScaleFactor(0.5)
@@ -50,7 +47,7 @@ struct QuoteView: View {
                             } placeholder: {
                                 ProgressView()
                             }
-                            .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
+                            .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.2)
                             
                             Text(viewModel.quote.author)
                                 .foregroundStyle(.white)
@@ -58,36 +55,37 @@ struct QuoteView: View {
                                 .frame(maxWidth: .infinity)
                                 .background(.ultraThinMaterial)
                         }
-                        .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
+                        .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.2)
                         .clipShape(.rect(cornerRadius: 50))
                         
                     case FetchStatus.failed(let error):
                         Text(error.localizedDescription)
                     }
-                    
-                    Spacer()
-                    
-                    Button {
-                        Task {
-                            await viewModel.getData(for: show)
-                        }
-                    } label: {
-                        Text("Get Random Quote")
-                            .font(.title)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color("\(show)Button".replacingOccurrences(of: " ", with: "")))
-                            .clipShape(.rect(cornerRadius: 7))
-                            .shadow(color: Color("\(show)Shadow".replacingOccurrences(of: " ", with: "")), radius: 2)
-                    }
-                    .frame(width: geo.size.width , height: geo.size.height / 2)
-                });
+                   
+                })
+            
             }
             .frame(width: geo.size.width, height: geo.size.height)
-            
-            Spacer()
         }
-        .ignoresSafeArea()
+        .safeAreaInset(edge: VerticalEdge.bottom) {
+            Button {
+                Task {
+                    await viewModel.getData(for: show)
+                }
+            } label: {
+                Text("Get Random Quote")
+                    .font(.title)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color("\(show)Button".replacingOccurrences(of: " ", with: "")))
+                    .clipShape(.rect(cornerRadius: 7))
+                    .shadow(color: Color("\(show)Shadow".replacingOccurrences(of: " ", with: "")), radius: 2)
+            }
+            .padding()
+           //
+            //.frame(width: geo.size.width , height: geo.size.height / 2)
+        }
+        
     }
 }
 

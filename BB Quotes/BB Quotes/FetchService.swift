@@ -18,7 +18,9 @@ struct FetchService {
     
     func fetchQoute(from show: String) async throws -> Quote {
         // Fetch data
-        let (data, response) = try await fetchData(show)
+        let quoteURL = baseURL.appending(path: "/quotes/1")
+        let fetchURL = quoteURL.appending(queryItems: [URLQueryItem(name: "production", value: show)])
+        let (data, response) = try await URLSession.shared.data(from: fetchURL)
         
         // Handle response
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
@@ -29,20 +31,6 @@ struct FetchService {
         let quote = try JSONDecoder().decode([Quote].self, from: data)
         
         return quote[0]
-    }
-    
-    private func fetchData(_ show: String) async throws -> (data: Data, response: URLResponse) {
-        if show.lowercased() == "Better Call Saul".lowercased() {
-            let quoteURL = baseURL.appending(path: "/quotes/1")
-            let fetchURL = quoteURL.appending(queryItems: [URLQueryItem(name: "production", value: show)])
-            let (data, response) = try await URLSession.shared.data(from: fetchURL)
-            
-            return (data, response)
-            
-        } else {
-            let (data, response) = try await URLSession.shared.data(from: bbURL)
-            return (data, response)
-        }
     }
     
     func fetchCharacter(_ name: String) async throws ->  Character {
