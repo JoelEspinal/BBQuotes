@@ -17,15 +17,8 @@ struct FetchService {
     private let bbURL = URL(string: "https://breaking-bad-api-six.vercel.app/api")!
     
     func fetchQoute(from show: String) async throws -> Quote {
-        // Build fecth url
-        let quoteURL = baseURL.appending(path: "/quotes/1")
-        
-        if show.lowercased() == "Better Call Saul".lowercased() {
-            let fetchURL = quoteURL.appending(queryItems: [URLQueryItem(name: "production", value: show)])
-        }
-        
         // Fetch data
-        let (data, response) = try await URLSession.shared.data(from: quoteURL)
+        let (data, response) = try await fetchData(show)
         
         // Handle response
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
@@ -36,6 +29,20 @@ struct FetchService {
         let quote = try JSONDecoder().decode([Quote].self, from: data)
         
         return quote[0]
+    }
+    
+    private func fetchData(_ show: String) async throws -> (data: Data, response: URLResponse) {
+        if show.lowercased() == "Better Call Saul".lowercased() {
+            let quoteURL = baseURL.appending(path: "/quotes/1")
+            let fetchURL = quoteURL.appending(queryItems: [URLQueryItem(name: "production", value: show)])
+            let (data, response) = try await URLSession.shared.data(from: fetchURL)
+            
+            return (data, response)
+            
+        } else {
+            let (data, response) = try await URLSession.shared.data(from: bbURL)
+            return (data, response)
+        }
     }
     
     func fetchCharacter(_ name: String) async throws ->  Character {
