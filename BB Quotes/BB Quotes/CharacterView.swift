@@ -18,7 +18,6 @@ struct CharacterView: View {
                 Image(show.lowercased().replacingOccurrences(of: " ", with: ""))
                     .resizable()
                 .scaledToFit()
-                
                 ScrollView {
                     AsyncImage(url: character.images[0]) { image in
                         image
@@ -30,6 +29,11 @@ struct CharacterView: View {
                     .frame(width: geo.size.width / 1.2, height: geo.size.height / 1.7)
                     .clipShape(.rect(cornerRadius: 25.0))
                 .padding(.top, 60.0)
+                    
+                    VStack(alignment: .leading) {
+                        Text(character.name)
+                    }
+                    .frame(width: geo.size.width / 1.25, alignment: .leading)
                 }
             })
         }
