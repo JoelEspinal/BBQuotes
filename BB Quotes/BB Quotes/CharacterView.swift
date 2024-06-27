@@ -19,16 +19,18 @@ struct CharacterView: View {
                     .resizable()
                 .scaledToFit()
                 
-                AsyncImage(url: character.images[0]) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                } placeholder: {
-                    ProgressView()
+                ScrollView {
+                    AsyncImage(url: character.images[0]) { image in
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(width: geo.size.width / 1.2, height: geo.size.height / 1.7)
+                    .clipShape(.rect(cornerRadius: 25.0))
+                .padding(.top, 60.0)
                 }
-                .frame(width: geo.size.width / 1.2, height: geo.size.height / 1.7)
-                .clipShape(.rect(cornerRadius: 25.0))
-            .padding(.top, 60.0)
             })
         }
         .ignoresSafeArea()
