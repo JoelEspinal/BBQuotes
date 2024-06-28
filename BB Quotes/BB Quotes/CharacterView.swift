@@ -32,9 +32,46 @@ struct CharacterView: View {
                     
                     VStack(alignment: .leading) {
                         Text(character.name)
+                            .font(.largeTitle)
+                        
+                        Text("Portrayed by: \(character.portrayedBy)")
+                            .font(.subheadline)
+                        
+                        Divider()
+                        
+                        Text("\(character.name) Character info:")
+                            .font(.title2)
+                        
+                        Text("Born: \(character.birthday)")
+                        
+                        Divider()
+                        
+                        Text("Occupation:")
+                        
+                        ForEach(character.occupations, id: \.self) { occupation in
+                            Text((occupation))
+                                .font(.subheadline)
+                        }
+                        
+                        Divider()
+                        
+                        Text("Nicknames:")
+                        
+                        if character.aliases.count > 0 {
+                            ForEach(character.aliases, id: \.self) { alias in
+                                Text((alias))
+                                    .font(.subheadline)
+                            }
+                        } else {
+                            Text("None")
+                                .font(.subheadline)
+                        }
                     }
+                    
                     .frame(width: geo.size.width / 1.25, alignment: .leading)
+                    .padding()
                 }
+                .scrollIndicators(.hidden)
             })
         }
         .ignoresSafeArea()
