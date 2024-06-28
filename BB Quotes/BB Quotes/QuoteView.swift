@@ -11,6 +11,8 @@ struct QuoteView: View {
     let viewModel = ViewModel()
     let show: String
     
+    @State var showCharacterInfo = false
+    
     var body: some View {
         
         GeometryReader { geo in
@@ -55,6 +57,9 @@ struct QuoteView: View {
                         }
                         .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.2)
                         .clipShape(.rect(cornerRadius: 50))
+                        .onTapGesture {
+                            showCharacterInfo.toggle()
+                        }
                         
                     case FetchStatus.failed(let error):
                         Text(error.localizedDescription)
@@ -81,7 +86,9 @@ struct QuoteView: View {
             }
             .padding()
         }
-        
+        .sheet(isPresented: $showCharacterInfo, content: {
+            CharacterView(character: viewModel.character, show: show)
+        })
     }
 }
 
