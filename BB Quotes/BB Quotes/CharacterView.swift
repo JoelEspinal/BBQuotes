@@ -77,7 +77,7 @@ struct CharacterView: View {
                                     AsyncImage(url: death.image) {image in
                                         image.resizable()
                                         image.scaledToFit()
-                                        image.clipShape(.rect(cornerRadius: 15))
+                                        image.clipShape(.rect(cornerRadius: 25))
                                         
                                     } placeholder: {
                                         ProgressView()
