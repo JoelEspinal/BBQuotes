@@ -19,7 +19,7 @@ struct BBQuotes17App: App {
 /**
  Version 2 Feature List:
  ✅ Add El Camino tap
- - Utilize character image on CharacterView
+ ✅  Utilize character image on CharacterView
  - OnCharacterView, auto-scroll to bottom after status is shown
  - Fetch episode data
  - Extend string to get rid of long image and color names
