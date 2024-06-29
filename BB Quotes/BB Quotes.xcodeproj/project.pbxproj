@@ -75,6 +75,7 @@
 		9B88B7302C1690E800CAF5FA /* BB Quotes */ = {
 			isa = PBXGroup;
 			children = (
+				9BF492312C2F94A4004E956E /* BBQuotes17App.swift */,
 				9B88B7312C1690E800CAF5FA /* BB_QuotesApp.swift */,
 				9B88B7332C1690E800CAF5FA /* ContentView.swift */,
 				9B0545A62C1BAD12007C6EB2 /* ViewModel.swift */,
@@ -87,7 +88,6 @@
 				9B88B7352C1690E900CAF5FA /* Assets.xcassets */,
 				9B88B73F2C16926600CAF5FA /* SampleData */,
 				9B88B7372C1690E900CAF5FA /* Preview Content */,
-				9BF492312C2F94A4004E956E /* BBQuotes17App.swift */,
 			);
 			path = "BB Quotes";
 			sourceTree = "<group>";
